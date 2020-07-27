@@ -9,6 +9,7 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import rojerusan.RSPanelsSlider;
 import java.awt.*;
+import org.json.simple.JSONObject;
 /**
  *
  * @author RojeruSan
@@ -22,16 +23,27 @@ public class Principal extends javax.swing.JFrame {
         initComponents();
         this.setLocationRelativeTo(this);
         this.setResizable(false);
-        
+        // metodos para la tabla de zonas 
         this.tabla.setModel(modelo);
         this.modelo.addColumn("Longitud");
         this.modelo.addColumn("Nombre Zona");
         this.modelo.addColumn("Latitud");
-        
-        
-          this.tablaplatas.setModel(modelop);
+         
+         // tabla plantas 
+          this.tablaplatas1.setModel(modelop);
+          this.modelop.addColumn("Nombre De La Planta");
+                  
           
-         this.modelop.addColumn("Nombre De La Planta");
+         // tabla antenas
+         
+         this.tablaantenas.setModel(modelopA);
+         this.modelopA.addColumn("ID ZONA");
+          this.modelopA.addColumn("RECEPCION");
+         
+         
+         
+          
+         
     }
 
     /**
@@ -69,27 +81,24 @@ public class Principal extends javax.swing.JFrame {
         Latitud = new javax.swing.JLabel();
         txtlatitud = new javax.swing.JTextField();
         btmAgregar = new javax.swing.JButton();
-        btmlimpiar = new javax.swing.JButton();
         btneliminar = new javax.swing.JButton();
         jScrollPane3 = new javax.swing.JScrollPane();
         tabla = new javax.swing.JTable();
-        jPanel4 = new javax.swing.JPanel();
-        txtbuscar = new javax.swing.JTextField();
-        btnbuscar = new javax.swing.JButton();
-        btnnuevo = new javax.swing.JButton();
         jPanel5 = new javax.swing.JPanel();
-        nomplanta = new javax.swing.JLabel();
+        NomPlanta = new javax.swing.JLabel();
         txtplantaagre = new javax.swing.JTextField();
         agregarplanta = new javax.swing.JButton();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        tablaplatas = new javax.swing.JTable();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        tablaplatas1 = new javax.swing.JTable();
         jPanel7 = new javax.swing.JPanel();
         jPanel6 = new javax.swing.JPanel();
-        jButton2 = new javax.swing.JButton();
+        btnagregarantenas = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
+        txtidzonaantena = new javax.swing.JTextField();
+        txtrecepcion = new javax.swing.JTextField();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        tablaantenas = new javax.swing.JTable();
         pnl3 = new javax.swing.JPanel();
         jPanel8 = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
@@ -99,8 +108,13 @@ public class Principal extends javax.swing.JFrame {
         jLabel10 = new javax.swing.JLabel();
         jTextField4 = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
+        jTextField5 = new javax.swing.JTextField();
         pnl4 = new javax.swing.JPanel();
+        jPanel10 = new javax.swing.JPanel();
+        jCPanel2 = new com.bolivia.panel.JCPanel();
         jLabel7 = new javax.swing.JLabel();
+        BTN17 = new javax.swing.JButton();
+        BTN15 = new javax.swing.JButton();
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -118,6 +132,7 @@ public class Principal extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jPanel1.setBackground(new java.awt.Color(204, 255, 255));
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel2.setBackground(new java.awt.Color(0, 102, 204));
         jPanel2.setBorder(new org.jdesktop.swingx.border.DropShadowBorder());
@@ -167,9 +182,11 @@ public class Principal extends javax.swing.JFrame {
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/trabalhador-agricultor_1325-134.jpg"))); // NOI18N
         jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 170, 120));
 
+        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 545));
+
         rSPanelsSlider1.setBackground(new java.awt.Color(255, 255, 255));
 
-        pnl1.setBackground(new java.awt.Color(255, 255, 255));
+        pnl1.setBackground(new java.awt.Color(0, 102, 255));
         pnl1.setName("pnl1"); // NOI18N
         pnl1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -178,6 +195,16 @@ public class Principal extends javax.swing.JFrame {
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/icons8_Maintenance_96px.png"))); // NOI18N
         jLabel1.setBorder(new org.jdesktop.swingx.border.DropShadowBorder());
+        jLabel1.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                jLabel1MouseMoved(evt);
+            }
+        });
+        jLabel1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jLabel1MouseExited(evt);
+            }
+        });
         pnl1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 50, 130, 130));
 
         jLabel11.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
@@ -185,6 +212,16 @@ public class Principal extends javax.swing.JFrame {
         jLabel11.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/icons8_Google_Drive_96px.png"))); // NOI18N
         jLabel11.setBorder(new org.jdesktop.swingx.border.DropShadowBorder());
+        jLabel11.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                jLabel11MouseMoved(evt);
+            }
+        });
+        jLabel11.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jLabel11MouseExited(evt);
+            }
+        });
         pnl1.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 50, 130, 130));
 
         jLabel12.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
@@ -192,6 +229,16 @@ public class Principal extends javax.swing.JFrame {
         jLabel12.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/icons8_Idea_96px.png"))); // NOI18N
         jLabel12.setBorder(new org.jdesktop.swingx.border.DropShadowBorder());
+        jLabel12.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                jLabel12MouseMoved(evt);
+            }
+        });
+        jLabel12.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jLabel12MouseExited(evt);
+            }
+        });
         pnl1.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 310, 130, 130));
 
         jLabel13.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
@@ -199,6 +246,16 @@ public class Principal extends javax.swing.JFrame {
         jLabel13.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/icons8_Handshake_96px.png"))); // NOI18N
         jLabel13.setBorder(new org.jdesktop.swingx.border.DropShadowBorder());
+        jLabel13.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                jLabel13MouseMoved(evt);
+            }
+        });
+        jLabel13.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jLabel13MouseExited(evt);
+            }
+        });
         pnl1.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 290, 130, 130));
 
         jLabel14.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
@@ -223,6 +280,16 @@ public class Principal extends javax.swing.JFrame {
         jLabel15.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel15.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/icons8_Today_96px.png"))); // NOI18N
         jLabel15.setBorder(new org.jdesktop.swingx.border.DropShadowBorder());
+        jLabel15.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                jLabel15MouseMoved(evt);
+            }
+        });
+        jLabel15.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jLabel15MouseExited(evt);
+            }
+        });
         pnl1.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 300, 130, 130));
 
         rSPanelsSlider1.add(pnl1, "card2");
@@ -259,15 +326,7 @@ public class Principal extends javax.swing.JFrame {
                 btmAgregarActionPerformed(evt);
             }
         });
-        jPanel3.add(btmAgregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 34, 90, -1));
-
-        btmlimpiar.setText("EDITAR");
-        btmlimpiar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btmlimpiarActionPerformed(evt);
-            }
-        });
-        jPanel3.add(btmlimpiar, new org.netbeans.lib.awtextra.AbsoluteConstraints(341, 130, 90, -1));
+        jPanel3.add(btmAgregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 30, 90, -1));
 
         btneliminar.setText("Eliminar");
         btneliminar.addActionListener(new java.awt.event.ActionListener() {
@@ -275,7 +334,7 @@ public class Principal extends javax.swing.JFrame {
                 btneliminarActionPerformed(evt);
             }
         });
-        jPanel3.add(btneliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(346, 180, 90, -1));
+        jPanel3.add(btneliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 120, 90, -1));
 
         tabla.setBackground(new java.awt.Color(255, 255, 255));
         tabla.setModel(new javax.swing.table.DefaultTableModel(
@@ -296,61 +355,16 @@ public class Principal extends javax.swing.JFrame {
         });
         jScrollPane3.setViewportView(tabla);
 
-        jPanel3.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(11, 242, 440, 90));
+        jPanel3.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 220, 440, 90));
 
-        jPanel4.setBackground(new java.awt.Color(255, 255, 255));
-
-        txtbuscar.setBackground(new java.awt.Color(255, 255, 255));
-        txtbuscar.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-
-        btnbuscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/icons8_Search_32px_2.png"))); // NOI18N
-        btnbuscar.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnbuscarMouseClicked(evt);
-            }
-        });
-        btnbuscar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnbuscarActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
-        jPanel4.setLayout(jPanel4Layout);
-        jPanel4Layout.setHorizontalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGap(15, 15, 15)
-                .addComponent(txtbuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 42, Short.MAX_VALUE)
-                .addComponent(btnbuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE))
-        );
-        jPanel4Layout.setVerticalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(txtbuscar)
-            .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(btnbuscar))
-        );
-
-        jPanel3.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(41, 176, -1, -1));
-
-        btnnuevo.setText("NUEVO");
-        btnnuevo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnnuevoActionPerformed(evt);
-            }
-        });
-        jPanel3.add(btnnuevo, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 78, 90, -1));
-
-        pnl2.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 100, 460, 337));
+        pnl2.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 110, 460, 337));
 
         jPanel5.setBackground(new java.awt.Color(255, 255, 255));
         jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Plantas", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Curlz MT", 3, 24), new java.awt.Color(0, 0, 204))); // NOI18N
         jPanel5.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        nomplanta.setText("Nombre De La Planta");
-        jPanel5.add(nomplanta, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 80, -1, -1));
+        NomPlanta.setText("Nombre De La Planta");
+        jPanel5.add(NomPlanta, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 80, -1, -1));
 
         txtplantaagre.setBackground(new java.awt.Color(255, 255, 255));
         jPanel5.add(txtplantaagre, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 80, 120, -1));
@@ -363,7 +377,7 @@ public class Principal extends javax.swing.JFrame {
         });
         jPanel5.add(agregarplanta, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 120, 100, 30));
 
-        tablaplatas.setModel(new javax.swing.table.DefaultTableModel(
+        tablaplatas1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -371,9 +385,14 @@ public class Principal extends javax.swing.JFrame {
 
             }
         ));
-        jScrollPane2.setViewportView(tablaplatas);
+        tablaplatas1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tablaplatas1MouseClicked(evt);
+            }
+        });
+        jScrollPane4.setViewportView(tablaplatas1);
 
-        jPanel5.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 171, 270, 100));
+        jPanel5.add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 171, 270, 100));
 
         pnl2.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(487, 15, 293, 282));
 
@@ -383,52 +402,45 @@ public class Principal extends javax.swing.JFrame {
 
         jPanel6.setBackground(new java.awt.Color(255, 255, 255));
         jPanel6.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "ANTENAS", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 3, 18))); // NOI18N
+        jPanel6.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jButton2.setText("agregar");
+        btnagregarantenas.setText("agregar");
+        btnagregarantenas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnagregarantenasActionPerformed(evt);
+            }
+        });
+        jPanel6.add(btnagregarantenas, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 77, 89, 33));
 
         jLabel4.setText("ID ZONA");
+        jPanel6.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(25, 69, -1, -1));
 
         jLabel9.setText("RECEPCION");
+        jPanel6.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(11, 110, -1, -1));
+        jPanel6.add(txtidzonaantena, new org.netbeans.lib.awtextra.AbsoluteConstraints(77, 60, 105, 35));
+        jPanel6.add(txtrecepcion, new org.netbeans.lib.awtextra.AbsoluteConstraints(83, 101, 99, 34));
 
-        javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
-        jPanel6.setLayout(jPanel6Layout);
-        jPanel6Layout.setHorizontalGroup(
-            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel6Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(jPanel6Layout.createSequentialGroup()
-                        .addGap(14, 14, 14)
-                        .addComponent(jLabel4)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField1))
-                    .addGroup(jPanel6Layout.createSequentialGroup()
-                        .addComponent(jLabel9)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(18, 18, 18)
-                .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, 79, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-        jPanel6Layout.setVerticalGroup(
-            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel6Layout.createSequentialGroup()
-                .addGap(36, 36, 36)
-                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel4))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel9)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(425, 425, 425))
-            .addGroup(jPanel6Layout.createSequentialGroup()
-                .addGap(53, 53, 53)
-                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
+        tablaantenas.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {},
+                {},
+                {},
+                {}
+            },
+            new String [] {
 
-        pnl2.add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 310, 290, 206));
+            }
+        ));
+        tablaantenas.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tablaantenasMouseClicked(evt);
+            }
+        });
+        jScrollPane2.setViewportView(tablaantenas);
+
+        jPanel6.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 150, 280, 70));
+
+        pnl2.add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 310, 300, 240));
 
         rSPanelsSlider1.add(pnl2, "card3");
 
@@ -462,58 +474,31 @@ public class Principal extends javax.swing.JFrame {
         pnl3.add(jPanel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 780, -1));
 
         jCPanel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/plantaNombre.jpg"))); // NOI18N
+        jCPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel6.setFont(new java.awt.Font("Dialog", 3, 18)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setText("Nombre De La Planta");
+        jCPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 105, -1, -1));
 
         jTextField3.setBackground(new java.awt.Color(255, 255, 255));
+        jCPanel1.add(jTextField3, new org.netbeans.lib.awtextra.AbsoluteConstraints(242, 99, 168, 40));
 
         jLabel10.setFont(new java.awt.Font("Dialog", 3, 18)); // NOI18N
         jLabel10.setForeground(new java.awt.Color(255, 255, 255));
         jLabel10.setText("ID ZONA");
+        jCPanel1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(127, 185, -1, -1));
 
         jTextField4.setBackground(new java.awt.Color(255, 255, 255));
+        jCPanel1.add(jTextField4, new org.netbeans.lib.awtextra.AbsoluteConstraints(242, 180, 168, 39));
 
         jButton1.setBackground(new java.awt.Color(0, 0, 153));
         jButton1.setForeground(new java.awt.Color(0, 0, 255));
         jButton1.setText("CONSULTAR");
+        jCPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(502, 127, 141, 47));
 
-        javax.swing.GroupLayout jCPanel1Layout = new javax.swing.GroupLayout(jCPanel1);
-        jCPanel1.setLayout(jCPanel1Layout);
-        jCPanel1Layout.setHorizontalGroup(
-            jCPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jCPanel1Layout.createSequentialGroup()
-                .addGap(20, 20, 20)
-                .addGroup(jCPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel10)
-                    .addComponent(jLabel6))
-                .addGap(41, 41, 41)
-                .addGroup(jCPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jTextField3)
-                    .addComponent(jTextField4, javax.swing.GroupLayout.DEFAULT_SIZE, 168, Short.MAX_VALUE))
-                .addGap(92, 92, 92)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(137, Short.MAX_VALUE))
-        );
-        jCPanel1Layout.setVerticalGroup(
-            jCPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jCPanel1Layout.createSequentialGroup()
-                .addGroup(jCPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jCPanel1Layout.createSequentialGroup()
-                        .addGap(99, 99, 99)
-                        .addGroup(jCPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel6)
-                            .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(jCPanel1Layout.createSequentialGroup()
-                        .addGap(127, 127, 127)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jCPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel10)
-                    .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(201, Short.MAX_VALUE))
-        );
+        jTextField5.setBackground(new java.awt.Color(255, 255, 255));
+        jCPanel1.add(jTextField5, new org.netbeans.lib.awtextra.AbsoluteConstraints(242, 293, 156, 55));
 
         pnl3.add(jCPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 100, 780, 420));
 
@@ -523,28 +508,54 @@ public class Principal extends javax.swing.JFrame {
         pnl4.setName("pnl4"); // NOI18N
         pnl4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel7.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
-        jLabel7.setForeground(new java.awt.Color(0, 102, 204));
-        jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel7.setText("PANEL #4");
-        pnl4.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 6, 780, 530));
+        jPanel10.setBackground(new java.awt.Color(0, 0, 204));
+
+        javax.swing.GroupLayout jPanel10Layout = new javax.swing.GroupLayout(jPanel10);
+        jPanel10.setLayout(jPanel10Layout);
+        jPanel10Layout.setHorizontalGroup(
+            jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 790, Short.MAX_VALUE)
+        );
+        jPanel10Layout.setVerticalGroup(
+            jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 70, Short.MAX_VALUE)
+        );
+
+        pnl4.add(jPanel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 790, 70));
+
+        jCPanel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/cultivos-tierras.jpg"))); // NOI18N
+        jCPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel7.setFont(new java.awt.Font("Footlight MT Light", 3, 48)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel7.setText("QUE DESEA REALIZAR ?");
+        jCPanel2.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(81, 6, -1, -1));
+
+        BTN17.setBackground(new java.awt.Color(0, 51, 153));
+        BTN17.setForeground(new java.awt.Color(255, 255, 255));
+        BTN17.setText("MODIFICAR REGISTROS");
+        BTN17.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BTN17ActionPerformed(evt);
+            }
+        });
+        jCPanel2.add(BTN17, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 370, 210, 70));
+
+        BTN15.setBackground(new java.awt.Color(0, 0, 204));
+        BTN15.setForeground(new java.awt.Color(255, 255, 255));
+        BTN15.setText("ELIMINAR REGISTROS");
+        BTN15.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BTN15ActionPerformed(evt);
+            }
+        });
+        jCPanel2.add(BTN15, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 270, 210, 70));
+
+        pnl4.add(jCPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 70, 780, 470));
 
         rSPanelsSlider1.add(pnl4, "card5");
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(rSPanelsSlider1, javax.swing.GroupLayout.DEFAULT_SIZE, 793, Short.MAX_VALUE))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(rSPanelsSlider1, javax.swing.GroupLayout.DEFAULT_SIZE, 545, Short.MAX_VALUE)
-            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
+        jPanel1.add(rSPanelsSlider1, new org.netbeans.lib.awtextra.AbsoluteConstraints(216, 0, 793, 545));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -564,6 +575,8 @@ public class Principal extends javax.swing.JFrame {
     DefaultTableModel modelo=new DefaultTableModel();
     
     DefaultTableModel modelop=new DefaultTableModel();
+    
+    DefaultTableModel modelopA=new DefaultTableModel();
     
     private void BTN10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTN10ActionPerformed
         // TODO add your handling code here:
@@ -616,48 +629,39 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_BTN13ActionPerformed
 
     private void btmAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btmAgregarActionPerformed
-        // TODO add your handling code here:
-      /* aqui comienxan los comentarios 
-        * String a=txtlongitud.getText();
-        * String b=txtnombrezona.getText();
-        * String c=txtlatitud.getText();
-        
-        * ProyectoCultivos.guardar(a, b, c);
-        
-        * //limpiar una vez guardado
-        
-        * txtlongitud.setText("");
-        * txtnombrezona.setText("");
-        * txtlatitud.setText("");
-        */
-      
-      this.modelo.addRow(new Object[]{this.txtlongitud.getText(),
+    
+         this.modelo.addRow(new Object[]{
+          this.txtlongitud.getText(),
           this.txtnombrezona.getText(), 
           this.txtlatitud.getText()});
+         
+      String a=txtlongitud.getText();
+      String b=txtnombrezona.getText();
+      String c=txtlatitud.getText();
       
+      
+  
+      
+String solicitud_url = "http://127.0.0.1/esp32/public/api/zonas";
+        curl api = new curl(solicitud_url, "POST");
+        
+        JSONObject sembradio = new JSONObject();
+        //sembradio.put("nomplanta", "Camote");
+        sembradio.put("longitud",a);
+        sembradio.put("NomZona",b);
+        sembradio.put("Latitud",c);
+        
+        JSONObject obj = api.apicall(sembradio); 
+        System.out.println(obj.get("mensaje"));
+        
+        
       this.txtlongitud.setText("");
       this.txtnombrezona.setText("");
       this.txtlatitud.setText("");
-
+          
     }//GEN-LAST:event_btmAgregarActionPerformed
 
     int filas;
-    private void btmlimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btmlimpiarActionPerformed
-        // TODO add your handling code here:
-        
-        String []datos=new String[3];
-        datos[0]=txtlongitud.getText();
-        datos[1]=txtnombrezona.getText();
-        datos[2]=txtlatitud.getText();
-        
-        for (int i = 0; i < tabla.getColumnCount(); i++){
-            modelo.setValueAt(datos[i], filas , i);
-        }
-        
-        
-       
-    }//GEN-LAST:event_btmlimpiarActionPerformed
-
     private void btneliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btneliminarActionPerformed
  
         int fila_seleccionada=tabla.getSelectedRow();
@@ -672,37 +676,35 @@ public class Principal extends javax.swing.JFrame {
        
     }//GEN-LAST:event_btneliminarActionPerformed
 
-    private void btnbuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnbuscarActionPerformed
-/*        // TODO add your handling code here:
-        
-        String buscar=txtbuscar.getText();
-        ProyectoCultivos.buscar(buscar);
-        //limpiar
-      txtbuscar.setText("");
-    }//GEN-LAST:event_btnbuscarActionPerformed
-
-    public void cargardatos(persona Per){
-        //llenar los campos al momento de buscar
-        
-        this.txtlongitud.setText(Per.getLonZona());
-        this.txtnombrezona.setText(Per.getZonanombre());
-        this.txtlatitud.setText(Per.getLatitudT());
-        
-        
-        */
-        
-          
-        
-    }
-    
-    
-    
     
     private void agregarplantaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregarplantaActionPerformed
         // TODO add your handling code here:
-         this.modelop.addRow(new Object[]{this.txtplantaagre.getText()});
-          this.txtplantaagre.setText("");
+     
+             //almacenan a la tabla 
+               this.modelop.addRow(new Object[]{
+               this.txtplantaagre.getText()});
+               
+               String a=txtplantaagre.getText();
+     
+          if (txtplantaagre.getText().equals("")) {
+          javax.swing.JOptionPane.showMessageDialog(this, "llenar los campos \n","AVISO!",javax.swing.JOptionPane.INFORMATION_MESSAGE);
+          txtplantaagre.requestFocus();
+          }
+          else 
+          {
+           
+String solicitud_url = "http://127.0.0.1/esp32/public/api/cultivos";
+        curl api = new curl(solicitud_url, "POST");
         
+        JSONObject sembradio = new JSONObject();
+        sembradio.put("nomplanta", a);
+        
+        JSONObject obj = api.apicall(sembradio); 
+        System.out.println(obj.get("mensaje"));
+        
+         this.txtplantaagre.setText("");
+          
+          }
         
     }//GEN-LAST:event_agregarplantaActionPerformed
 
@@ -717,13 +719,6 @@ public class Principal extends javax.swing.JFrame {
          jLabel14.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255) ) );
     }//GEN-LAST:event_jLabel14MouseExited
 
-    private void btnnuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnnuevoActionPerformed
-        // TODO add your handling code here:
-        this.txtlongitud.setText("");
-        this.txtnombrezona.setText("");
-        this.txtlatitud.setText("");
-    }//GEN-LAST:event_btnnuevoActionPerformed
-
     private void tablaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaMouseClicked
         // TODO add your handling code here:
         int fila_seleccionada=tabla.getSelectedRow();
@@ -734,9 +729,116 @@ public class Principal extends javax.swing.JFrame {
         filas=fila_seleccionada;
     }//GEN-LAST:event_tablaMouseClicked
 
-    private void btnbuscarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnbuscarMouseClicked
+    private void jLabel1MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseExited
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnbuscarMouseClicked
+        jLabel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255) ) );
+    }//GEN-LAST:event_jLabel1MouseExited
+
+    private void jLabel11MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel11MouseExited
+        // TODO add your handling code here:
+        jLabel11.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255) ) );
+    }//GEN-LAST:event_jLabel11MouseExited
+
+    private void jLabel12MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel12MouseExited
+        // TODO add your handling code here:
+         jLabel12.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255) ) );
+    }//GEN-LAST:event_jLabel12MouseExited
+
+    private void jLabel15MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel15MouseExited
+        // TODO add your handling code here:
+          jLabel15.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255) ) );
+    }//GEN-LAST:event_jLabel15MouseExited
+
+    private void jLabel13MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel13MouseExited
+        // TODO add your handling code here:
+          jLabel13.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255) ) );
+    }//GEN-LAST:event_jLabel13MouseExited
+
+    private void jLabel1MouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseMoved
+        // TODO add your handling code here:
+         jLabel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 153, 153) ) );
+    }//GEN-LAST:event_jLabel1MouseMoved
+
+    private void jLabel11MouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel11MouseMoved
+        // TODO add your handling code here:
+         jLabel11.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 153, 153) ) );
+    }//GEN-LAST:event_jLabel11MouseMoved
+
+    private void jLabel12MouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel12MouseMoved
+        // TODO add your handling code here:
+         jLabel12.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 153, 153) ) );
+    }//GEN-LAST:event_jLabel12MouseMoved
+
+    private void jLabel15MouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel15MouseMoved
+        // TODO add your handling code here:
+         jLabel15.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 153, 153) ) );
+    }//GEN-LAST:event_jLabel15MouseMoved
+
+    private void jLabel13MouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel13MouseMoved
+        // TODO add your handling code here:
+         jLabel13.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 153, 153) ) );
+    }//GEN-LAST:event_jLabel13MouseMoved
+
+    private void btnagregarantenasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnagregarantenasActionPerformed
+        // TODO add your handling code here:
+        
+        String a=txtidzonaantena.getText();
+             String b=txtrecepcion.getText();
+             
+           this.txtidzonaantena.setText("");
+           this.txtrecepcion.setText("");
+           
+String solicitud_url = "http://127.0.0.1/esp32/public/api/antenas";
+        curl api = new curl(solicitud_url, "POST");
+        
+        JSONObject sembradio = new JSONObject();
+        sembradio.put("idZona", a);
+        sembradio.put("Recepcion", b);
+        
+        JSONObject obj = api.apicall(sembradio); 
+        System.out.println(obj.get("mensaje"));
+        
+      
+    }//GEN-LAST:event_btnagregarantenasActionPerformed
+
+    private void tablaplatas1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaplatas1MouseClicked
+        // TODO add your handling code here:
+          int fila_seleccionadaplanta=tabla.getSelectedRow();
+        txtplantaagre.setText(tablaplatas1.getValueAt(fila_seleccionadaplanta, 0).toString());
+
+        filas=fila_seleccionadaplanta;
+        
+    }//GEN-LAST:event_tablaplatas1MouseClicked
+
+    private void tablaantenasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaantenasMouseClicked
+        // TODO add your handling code here:
+        int fila_seleccionadaantena=tabla.getSelectedRow();
+        
+        txtidzonaantena.setText(tabla.getValueAt(fila_seleccionadaantena, 0).toString());
+        txtrecepcion.setText(tabla.getValueAt(fila_seleccionadaantena, 0).toString());
+
+        filas=fila_seleccionadaantena;
+    }//GEN-LAST:event_tablaantenasMouseClicked
+
+    private void BTN17ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTN17ActionPerformed
+        // TODO add your handling code here:
+        
+         BTNMODIFICAR JN = new BTNMODIFICAR();
+            JN.setVisible(true);
+            dispose();
+
+    }//GEN-LAST:event_BTN17ActionPerformed
+
+    private void BTN15ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTN15ActionPerformed
+        // TODO add your handling code here:
+        
+        btnEliminarRegistros zN = new btnEliminarRegistros();
+            zN.setVisible(true);
+            dispose();
+
+
+        
+    }//GEN-LAST:event_BTN15ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -778,16 +880,17 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JButton BTN11;
     private javax.swing.JButton BTN12;
     private javax.swing.JButton BTN13;
+    private javax.swing.JButton BTN15;
+    private javax.swing.JButton BTN17;
     private javax.swing.JLabel Latitud;
+    private javax.swing.JLabel NomPlanta;
     private javax.swing.JButton agregarplanta;
     private javax.swing.JButton btmAgregar;
-    private javax.swing.JButton btmlimpiar;
-    private javax.swing.JButton btnbuscar;
+    private javax.swing.JButton btnagregarantenas;
     private javax.swing.JButton btneliminar;
-    private javax.swing.JButton btnnuevo;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private com.bolivia.panel.JCPanel jCPanel1;
+    private com.bolivia.panel.JCPanel jCPanel2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -803,9 +906,9 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
@@ -813,24 +916,25 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
     private javax.swing.JTextField jTextField4;
-    private javax.swing.JLabel nomplanta;
+    private javax.swing.JTextField jTextField5;
     private javax.swing.JPanel pnl1;
     private javax.swing.JPanel pnl2;
     private javax.swing.JPanel pnl3;
     private javax.swing.JPanel pnl4;
     private rojerusan.RSPanelsSlider rSPanelsSlider1;
     private javax.swing.JTable tabla;
-    private javax.swing.JTable tablaplatas;
-    private javax.swing.JTextField txtbuscar;
+    private javax.swing.JTable tablaantenas;
+    private javax.swing.JTable tablaplatas1;
+    private javax.swing.JTextField txtidzonaantena;
     private javax.swing.JTextField txtlatitud;
     private javax.swing.JTextField txtlongitud;
     private javax.swing.JTextField txtnombrezona;
     private javax.swing.JTextField txtplantaagre;
+    private javax.swing.JTextField txtrecepcion;
     private javax.swing.JLabel zonanombre;
     // End of variables declaration//GEN-END:variables
 }
