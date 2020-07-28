@@ -104,17 +104,20 @@ public class Principal extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         jCPanel1 = new com.bolivia.panel.JCPanel();
         jLabel6 = new javax.swing.JLabel();
-        jTextField3 = new javax.swing.JTextField();
+        nomplanta = new javax.swing.JTextField();
         jLabel10 = new javax.swing.JLabel();
-        jTextField4 = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
-        jTextField5 = new javax.swing.JTextField();
+        idzona = new javax.swing.JTextField();
+        consulta = new javax.swing.JButton();
+        jScrollPane5 = new javax.swing.JScrollPane();
+        mostrar = new javax.swing.JTextArea();
+        todas = new javax.swing.JButton();
+        UR = new javax.swing.JButton();
         pnl4 = new javax.swing.JPanel();
         jPanel10 = new javax.swing.JPanel();
         jCPanel2 = new com.bolivia.panel.JCPanel();
         jLabel7 = new javax.swing.JLabel();
-        BTN17 = new javax.swing.JButton();
-        BTN15 = new javax.swing.JButton();
+        btnModificar = new javax.swing.JButton();
+        btnEliminar = new javax.swing.JButton();
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -304,20 +307,14 @@ public class Principal extends javax.swing.JFrame {
 
         jLabel3.setText("Longitud:");
         jPanel3.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(66, 36, -1, -1));
-
-        txtlongitud.setBackground(new java.awt.Color(255, 255, 255));
         jPanel3.add(txtlongitud, new org.netbeans.lib.awtextra.AbsoluteConstraints(124, 32, 111, -1));
 
         zonanombre.setText("Nombre de La Zona:");
         jPanel3.add(zonanombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(5, 78, -1, -1));
-
-        txtnombrezona.setBackground(new java.awt.Color(255, 255, 255));
         jPanel3.add(txtnombrezona, new org.netbeans.lib.awtextra.AbsoluteConstraints(124, 82, 111, -1));
 
         Latitud.setText("Latitud:");
         jPanel3.add(Latitud, new org.netbeans.lib.awtextra.AbsoluteConstraints(76, 131, -1, -1));
-
-        txtlatitud.setBackground(new java.awt.Color(255, 255, 255));
         jPanel3.add(txtlatitud, new org.netbeans.lib.awtextra.AbsoluteConstraints(124, 131, 111, -1));
 
         btmAgregar.setText("AGREGAR");
@@ -336,7 +333,6 @@ public class Principal extends javax.swing.JFrame {
         });
         jPanel3.add(btneliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 120, 90, -1));
 
-        tabla.setBackground(new java.awt.Color(255, 255, 255));
         tabla.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {},
@@ -365,8 +361,6 @@ public class Principal extends javax.swing.JFrame {
 
         NomPlanta.setText("Nombre De La Planta");
         jPanel5.add(NomPlanta, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 80, -1, -1));
-
-        txtplantaagre.setBackground(new java.awt.Color(255, 255, 255));
         jPanel5.add(txtplantaagre, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 80, 120, -1));
 
         agregarplanta.setText("Agregar");
@@ -479,26 +473,51 @@ public class Principal extends javax.swing.JFrame {
         jLabel6.setFont(new java.awt.Font("Dialog", 3, 18)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setText("Nombre De La Planta");
-        jCPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 105, -1, -1));
+        jCPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 30, -1, -1));
 
-        jTextField3.setBackground(new java.awt.Color(255, 255, 255));
-        jCPanel1.add(jTextField3, new org.netbeans.lib.awtextra.AbsoluteConstraints(242, 99, 168, 40));
+        nomplanta.setBackground(new java.awt.Color(255, 255, 255));
+        jCPanel1.add(nomplanta, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 20, 168, 40));
 
         jLabel10.setFont(new java.awt.Font("Dialog", 3, 18)); // NOI18N
         jLabel10.setForeground(new java.awt.Color(255, 255, 255));
         jLabel10.setText("ID ZONA");
-        jCPanel1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(127, 185, -1, -1));
+        jCPanel1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 100, -1, -1));
 
-        jTextField4.setBackground(new java.awt.Color(255, 255, 255));
-        jCPanel1.add(jTextField4, new org.netbeans.lib.awtextra.AbsoluteConstraints(242, 180, 168, 39));
+        idzona.setBackground(new java.awt.Color(255, 255, 255));
+        jCPanel1.add(idzona, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 100, 168, 39));
 
-        jButton1.setBackground(new java.awt.Color(0, 0, 153));
-        jButton1.setForeground(new java.awt.Color(0, 0, 255));
-        jButton1.setText("CONSULTAR");
-        jCPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(502, 127, 141, 47));
+        consulta.setBackground(new java.awt.Color(0, 0, 153));
+        consulta.setForeground(new java.awt.Color(0, 0, 255));
+        consulta.setText("CONSULTAR");
+        consulta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                consultaActionPerformed(evt);
+            }
+        });
+        jCPanel1.add(consulta, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 170, 141, 47));
 
-        jTextField5.setBackground(new java.awt.Color(255, 255, 255));
-        jCPanel1.add(jTextField5, new org.netbeans.lib.awtextra.AbsoluteConstraints(242, 293, 156, 55));
+        mostrar.setBackground(new java.awt.Color(255, 255, 255));
+        mostrar.setColumns(20);
+        mostrar.setRows(5);
+        jScrollPane5.setViewportView(mostrar);
+
+        jCPanel1.add(jScrollPane5, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 240, 440, 140));
+
+        todas.setText("TODAS LAS PLANTAS");
+        todas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                todasActionPerformed(evt);
+            }
+        });
+        jCPanel1.add(todas, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 80, -1, -1));
+
+        UR.setText("Ultimo Registro");
+        UR.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                URActionPerformed(evt);
+            }
+        });
+        jCPanel1.add(UR, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 140, -1, -1));
 
         pnl3.add(jCPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 100, 780, 420));
 
@@ -531,25 +550,25 @@ public class Principal extends javax.swing.JFrame {
         jLabel7.setText("QUE DESEA REALIZAR ?");
         jCPanel2.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(81, 6, -1, -1));
 
-        BTN17.setBackground(new java.awt.Color(0, 51, 153));
-        BTN17.setForeground(new java.awt.Color(255, 255, 255));
-        BTN17.setText("MODIFICAR REGISTROS");
-        BTN17.addActionListener(new java.awt.event.ActionListener() {
+        btnModificar.setBackground(new java.awt.Color(0, 51, 153));
+        btnModificar.setForeground(new java.awt.Color(255, 255, 255));
+        btnModificar.setText("MODIFICAR REGISTROS");
+        btnModificar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BTN17ActionPerformed(evt);
+                btnModificarActionPerformed(evt);
             }
         });
-        jCPanel2.add(BTN17, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 370, 210, 70));
+        jCPanel2.add(btnModificar, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 370, 210, 70));
 
-        BTN15.setBackground(new java.awt.Color(0, 0, 204));
-        BTN15.setForeground(new java.awt.Color(255, 255, 255));
-        BTN15.setText("ELIMINAR REGISTROS");
-        BTN15.addActionListener(new java.awt.event.ActionListener() {
+        btnEliminar.setBackground(new java.awt.Color(0, 0, 204));
+        btnEliminar.setForeground(new java.awt.Color(255, 255, 255));
+        btnEliminar.setText("ELIMINAR REGISTROS");
+        btnEliminar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BTN15ActionPerformed(evt);
+                btnEliminarActionPerformed(evt);
             }
         });
-        jCPanel2.add(BTN15, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 270, 210, 70));
+        jCPanel2.add(btnEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 270, 210, 70));
 
         pnl4.add(jCPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 70, 780, 470));
 
@@ -638,6 +657,13 @@ public class Principal extends javax.swing.JFrame {
       String a=txtlongitud.getText();
       String b=txtnombrezona.getText();
       String c=txtlatitud.getText();
+      if (txtlongitud.getText().isEmpty()  || txtnombrezona.getText().isEmpty() || txtlatitud.getText().isEmpty()
+              ){
+          JOptionPane.showMessageDialog(this, "Favor De No dejar campos vacios  ");
+          
+          
+      }
+      
       
       
   
@@ -658,6 +684,7 @@ String solicitud_url = "http://127.0.0.1/esp32/public/api/zonas";
       this.txtlongitud.setText("");
       this.txtnombrezona.setText("");
       this.txtlatitud.setText("");
+
           
     }//GEN-LAST:event_btmAgregarActionPerformed
 
@@ -781,7 +808,10 @@ String solicitud_url = "http://127.0.0.1/esp32/public/api/cultivos";
 
     private void btnagregarantenasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnagregarantenasActionPerformed
         // TODO add your handling code here:
-        
+        this.modelopA.addRow(new Object[]{
+               this.txtidzonaantena.getText(),
+                 this.txtrecepcion.getText()
+         });
         String a=txtidzonaantena.getText();
              String b=txtrecepcion.getText();
              
@@ -820,25 +850,73 @@ String solicitud_url = "http://127.0.0.1/esp32/public/api/antenas";
         filas=fila_seleccionadaantena;
     }//GEN-LAST:event_tablaantenasMouseClicked
 
-    private void BTN17ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTN17ActionPerformed
+    private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
         // TODO add your handling code here:
         
-         BTNMODIFICAR JN = new BTNMODIFICAR();
+         MenuOpcciones JN = new MenuOpcciones();
             JN.setVisible(true);
             dispose();
 
-    }//GEN-LAST:event_BTN17ActionPerformed
+    }//GEN-LAST:event_btnModificarActionPerformed
 
-    private void BTN15ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTN15ActionPerformed
+    private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
         // TODO add your handling code here:
         
-        btnEliminarRegistros zN = new btnEliminarRegistros();
-            zN.setVisible(true);
+               MenuEliminar JN = new MenuEliminar();
+            JN.setVisible(true);
             dispose();
 
-
         
-    }//GEN-LAST:event_BTN15ActionPerformed
+        
+        
+    }//GEN-LAST:event_btnEliminarActionPerformed
+
+    private void consultaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_consultaActionPerformed
+        // TODO add your handling code here:
+            String n=nomplanta.getText();
+            String z=idzona.getText();
+           this.nomplanta.setText("");
+           this.idzona.setText("");
+           
+String solicitud_url = "http://127.0.0.1/esp32/public/api/postconsulta";
+        curl api = new curl(solicitud_url, "POST");
+        
+        JSONObject BTNGET = new JSONObject();
+        BTNGET.put("NomPlanta", n);
+        BTNGET.put("idZona", z);
+        
+        JSONObject obj = api.apicall(BTNGET); 
+        System.out.println(obj.get("Nombre"));
+        System.out.println(obj.get("result"));
+        String a=obj.toString();
+        this.mostrar.setText(a);
+    }//GEN-LAST:event_consultaActionPerformed
+
+    private void todasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_todasActionPerformed
+        // TODO add your handling code here:
+        String solicitud_url = "http://127.0.0.1/esp32/public/api/registro";
+        curl api = new curl(solicitud_url, "PUT");
+        
+        JSONObject BTNGET = new JSONObject();
+        
+        JSONObject obj = api.apicall(BTNGET); 
+        System.out.println(obj.get("result"));
+        String a=obj.toString();
+        this.mostrar.setText(a);
+    }//GEN-LAST:event_todasActionPerformed
+
+    private void URActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_URActionPerformed
+        // TODO add your handling code here:
+        String solicitud_url = "http://127.0.0.1/esp32/public/api/plantazona";
+        curl api = new curl(solicitud_url, "PUT");
+        
+        JSONObject BTNGET = new JSONObject();
+        
+        JSONObject obj = api.apicall(BTNGET); 
+        System.out.println(obj.get("result"));
+        String a=obj.toString();
+        this.mostrar.setText(a);
+    }//GEN-LAST:event_URActionPerformed
 
     /**
      * @param args the command line arguments
@@ -880,15 +958,17 @@ String solicitud_url = "http://127.0.0.1/esp32/public/api/antenas";
     private javax.swing.JButton BTN11;
     private javax.swing.JButton BTN12;
     private javax.swing.JButton BTN13;
-    private javax.swing.JButton BTN15;
-    private javax.swing.JButton BTN17;
     private javax.swing.JLabel Latitud;
     private javax.swing.JLabel NomPlanta;
+    private javax.swing.JButton UR;
     private javax.swing.JButton agregarplanta;
     private javax.swing.JButton btmAgregar;
+    private javax.swing.JButton btnEliminar;
+    private javax.swing.JButton btnModificar;
     private javax.swing.JButton btnagregarantenas;
     private javax.swing.JButton btneliminar;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton consulta;
+    private javax.swing.JTextField idzona;
     private com.bolivia.panel.JCPanel jCPanel1;
     private com.bolivia.panel.JCPanel jCPanel2;
     private javax.swing.JLabel jLabel1;
@@ -917,10 +997,10 @@ String solicitud_url = "http://127.0.0.1/esp32/public/api/antenas";
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField5;
+    private javax.swing.JTextArea mostrar;
+    private javax.swing.JTextField nomplanta;
     private javax.swing.JPanel pnl1;
     private javax.swing.JPanel pnl2;
     private javax.swing.JPanel pnl3;
@@ -929,6 +1009,7 @@ String solicitud_url = "http://127.0.0.1/esp32/public/api/antenas";
     private javax.swing.JTable tabla;
     private javax.swing.JTable tablaantenas;
     private javax.swing.JTable tablaplatas1;
+    private javax.swing.JButton todas;
     private javax.swing.JTextField txtidzonaantena;
     private javax.swing.JTextField txtlatitud;
     private javax.swing.JTextField txtlongitud;
